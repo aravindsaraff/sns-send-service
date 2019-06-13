@@ -1,0 +1,43 @@
+schema:
+  version: @project.version@
+
+spring:
+  async:
+    deferred:
+      timeout: 600000
+  datasource:
+    initialize: false
+  profiles:
+    active:
+    - "local"
+management:
+  context-path: "/monitor"
+endpoints:
+  health:
+    id: status
+    path: /status
+    enabled: true
+    sensitive: false
+  info:
+    enabled: true
+  flyway:
+    sensitive: false
+    enabled: true
+
+aws:
+  sns:
+    region: us-east-1
+
+dateFormat: "yyyy-MM-dd HH:mm:ss"
+
+#in minutes, used only when no previous runtime present
+default:
+  lookback: 2
+
+executorservice:
+  threads:
+    minSize: 10
+    maxSize: 25
+    idleTimeSeconds: 60
+  queue:
+    maxSize: 1000
